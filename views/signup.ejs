@@ -1,0 +1,19 @@
+<h1>Create Account</h1>
+<form action="/signup" method="POST" class="card form">
+  <% if (typeof error === 'string' && error) { %>
+  <p class="error"><%= error %></p>
+  <% } %>
+  <label
+    >Username
+    <input name="username" required />
+  </label>
+  <label
+    >Password
+    <input name="password" type="password" required minlength="4" />
+  </label>
+  <p class="muted">All accounts created here are <strong>Admins</strong>.</p>
+  <div class="actions">
+    <button class="btn" type="submit">Create Account</button>
+    <a class="btn ghost" href="/roster">Cancel</a>
+  </div>
+</form>

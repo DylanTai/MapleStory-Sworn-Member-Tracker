@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title || "Sworn Member Tracker" %></title>
+    <!-- ChatGPT wrote this -->
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="icon" href="/wooper-favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/wooper-favicon.png" />
+    <meta name="theme-color" content="#7ec9e3" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/roster">SWORN</a>
+      <nav class="nav-center">
+        <a href="/roster">Roster</a>
+        <% if (currentUser) { %>
+        <a href="/members">Edit Members</a>
+        <a href="/members/my-edits">My Edits</a>
+        <a href="/signup">Create New Admin</a>
+        <% } %>
+      </nav>
+      <div class="auth">
+        <% if (currentUser) { %>
+        <span class="muted"
+          >Logged in as <strong><%= currentUser.username %></strong></span
+        >
+        <form action="/logout" method="POST" style="display: inline">
+          <button class="linklike btn ghost small" type="submit">Logout</button>
+        </form>
+        <% } else { %>
+        <a class="btn ghost small" href="/login">Login</a>
+        <% } %>
+      </div>
+    </header>
+    <main class="container"><%- body %></main>
+  </body>
+</html>

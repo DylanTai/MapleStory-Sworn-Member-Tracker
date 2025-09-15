@@ -1,0 +1,23 @@
+<h1><%= member.ign %></h1>
+<div class="card">
+  <% const src = member.avatarUrl ? member.avatarUrl :
+  "https://via.placeholder.com/120"; %>
+  <img src="<%= src %>" class="avatar" alt="avatar" />
+  <p><strong>Discord:</strong> <%= member.discord || '-' %></p>
+  <p><strong>Active:</strong> <%= member.isActive ? 'Yes' : 'No' %></p>
+  <p><strong>Culvert:</strong> <%= commas(member.culvertBest) %></p>
+  <p><strong>Notes:</strong> <%= member.notes || '-' %></p>
+  <div class="actions">
+    <% if (canEdit) { %>
+    <a class="btn" href="/members/<%= member._id %>/edit">Edit</a>
+    <form
+      action="/members/<%= member._id %>?_method=DELETE"
+      method="POST"
+      onsubmit="return confirm('Delete this member?')"
+    >
+      <button class="btn danger" type="submit">Delete</button>
+    </form>
+    <% } %>
+    <a class="btn ghost" href="/members">Back</a>
+  </div>
+</div>

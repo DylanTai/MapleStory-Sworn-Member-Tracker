@@ -1,0 +1,18 @@
+<h1>Officer Login</h1>
+<form action="/login" method="POST" class="card form">
+  <% if (typeof error === 'string' && error) { %>
+  <p class="error"><%= error %></p>
+  <% } %>
+  <label
+    >Username
+    <input name="username" required />
+  </label>
+  <label
+    >Password
+    <input name="password" type="password" required />
+  </label>
+  <div class="actions">
+    <button class="btn" type="submit">Login</button>
+    <a class="btn ghost" href="/roster">Cancel</a>
+  </div>
+</form>

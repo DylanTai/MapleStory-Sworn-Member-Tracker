@@ -1,0 +1,156 @@
+<% const isMyEdits = (typeof myEdits !== 'undefined') ? myEdits : (typeof path
+!== 'undefined' && path.includes('/my-edits')); %>
+<h1><%= isMyEdits ? 'My Edits' : 'Edit Members' %></h1>
+
+<div class="actions">
+  <a class="btn" href="/members/new">+ New Member</a>
+  <a
+    class="btn ghost"
+    href="/members?page=<%= page %><%= q ? ('&q=' + encodeURIComponent(q)) : '' %>&refresh=1"
+    >Refresh Avatars</a
+  >
+  <form method="GET" action="/members" class="inline" style="margin-left: auto">
+    <input
+      name="q"
+      value="<%= q || '' %>"
+      placeholder="Search IGN or Discord"
+    />
+    <button class="btn ghost small" type="submit">Search</button>
+  </form>
+</div>
+
+<% if (!members.length) { %>
+<p class="muted">No members yet.</p>
+<% } else { %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Avatar</th>
+      <th>
+        <% const nextIgnOrder = (sortKey === 'ign' && order === 'asc') ? 'desc'
+        : 'asc'; %>
+        <a
+          href="/members?<%= 'page=1' + (q ? '&q=' + encodeURIComponent(q) : '') + '&sort=ign&order=' + nextIgnOrder %>"
+          >IGN</a
+        >
+      </th>
+      <th>
+        <% const nextDiscOrder = (sortKey === 'discord' && order === 'asc') ?
+        'desc' : 'asc'; %>
+        <a
+          href="/members?<%= 'page=1' + (q ? '&q=' + encodeURIComponent(q) : '') + '&sort=discord&order=' + nextDiscOrder %>"
+          >Discord Tag</a
+        >
+      </th>
+      <th>
+        <% const nextCreatedByOrder = (sortKey === 'createdby' && order ===
+        'asc') ? 'desc' : 'asc'; %>
+        <a
+          href="/members?<%= 'page=1' + (q ? '&q=' + encodeURIComponent(q) : '') + '&sort=createdby&order=' + nextCreatedByOrder %>"
+          >Created By</a
+        >
+      </th>
+      <th>
+        <% const nextActiveOrder = (sortKey === 'active' && order === 'desc') ?
+        'asc' : 'desc'; %>
+        <a
+          href="/members?<%= 'page=1' + (q ? '&q=' + encodeURIComponent(q) : '') + '&sort=active&order=' + nextActiveOrder %>"
+          >Active</a
+        >
+      </th>
+      <th>
+        <% const nextCulvOrder = (sortKey === 'culvert' && order === 'desc') ?
+        'asc' : 'desc'; %>
+        <a
+          href="/members?<%= 'page=1' + (q ? '&q=' + encodeURIComponent(q) : '') + '&sort=culvert&order=' + nextCulvOrder %>"
+          >Culvert</a
+        >
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% members.forEach(m => { %>
+    <tr>
+      <% const src = m.avatarUrl ? m.avatarUrl :
+      "https://via.placeholder.com/60"; %>
+      <td><img class="avatar-sm" src="<%= src %>" alt="" /></td>
+      <td><a href="/members/<%= m._id %>"><%= m.ign %></a></td>
+      <td><%= m.discord || '' %></td>
+      <td>
+        <%= (m.createdBy && m.createdBy.username) ? m.createdBy.username : '-'
+        %>
+      </td>
+      <td><%= m.isActive ? 'Yes' : 'No' %></td>
+      <td><%= commas(m.culvertBest) %></td>
+      <td class="actions">
+        <a class="btn ghost small" href="/members/<%= m._id %>">View</a>
+        <% if (m.canEdit) { %>
+        <a class="btn ghost small" href="/members/<%= m._id %>/edit">Edit</a>
+        <form
+          action="/members/<%= m._id %>?_method=DELETE"
+          method="POST"
+          class="inline"
+          onsubmit="return confirm('Delete this member?')"
+        >
+          <button class="btn danger small" type="submit">Delete</button>
+        </form>
+        <% } %>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+<% } %>
+
+<!-- PAGINATION -->
+<% if (totalPages > 1) { %>
+<div class="pagination">
+  <% for (let i = 1; i <= totalPages; i++) { %> <% const active = i === page ?
+  'active' : ''; %>
+  <a
+    class="<%= active %>"
+    href="/members?<%= 'page=' + i + (q ? '&q=' + encodeURIComponent(q) : '') + (sortKey ? '&sort=' + sortKey + '&order=' + order : '') %>"
+    ><%= i %></a
+  >
+  <% } %>
+</div>
+<% } %> <% if (currentUser) { %>
+<div class="card danger-zone">
+  <h3 style="margin-top: 0">Danger Zone</h3>
+  <p class="muted">
+    Type the captcha exactly:
+    <code>I AM MOST CERTAIN I WANT THIS ACTION TO BE DONE!!</code>
+  </p>
+  <div class="actions">
+    <form
+      action="/members/wipe-members"
+      method="POST"
+      class="inline"
+      onsubmit="return confirm('Delete ALL members? This cannot be undone.')"
+    >
+      <input
+        name="captcha"
+        placeholder="I AM MOST CERTAIN I WANT THIS ACTION TO BE DONE!!"
+        required
+      />
+      <button class="btn danger small" type="submit">Delete ALL Members</button>
+    </form>
+    <form
+      action="/account/delete-self"
+      method="POST"
+      class="inline"
+      onsubmit="return confirm('Delete YOUR account and log out? This cannot be undone.')"
+    >
+      <input
+        name="captcha"
+        placeholder="I AM MOST CERTAIN I WANT THIS ACTION TO BE DONE!!"
+        required
+      />
+      <button class="btn danger small" type="submit">
+        Delete MY Account & Log Out
+      </button>
+    </form>
+  </div>
+</div>
+<% } %>

@@ -1,0 +1,40 @@
+<h1>Roster</h1>
+
+<div class="actions" style="gap: 8px">
+  <a
+    class="btn <%= status === 'active' ? '' : 'ghost' %>"
+    href="/roster?status=active"
+    >Active</a
+  >
+  <a
+    class="btn <%= status === 'inactive' ? '' : 'ghost' %>"
+    href="/roster?status=inactive"
+    >Inactive</a
+  >
+</div>
+
+<div class="roster-grid">
+  <% members.forEach(m => { const src = m.avatarUrl ? m.avatarUrl :
+  "https://via.placeholder.com/100?text=Avatar"; %>
+  <div class="roster-card">
+    <img src="<%= src %>" alt="avatar" class="avatar" />
+    <div class="ign"><%= m.ign %></div>
+  </div>
+  <% }) %>
+</div>
+
+<!-- Numbered pagination -->
+<div
+  class="actions"
+  style="justify-content: center; margin-top: 12px; flex-wrap: wrap"
+>
+  <% const max = totalPages; const base = '/roster?status=' +
+  encodeURIComponent(status) + '&page='; %> <% for (let p = 1; p <= max; p++) {
+  %> <% if (p === page) { %>
+  <span class="btn small" style="pointer-events: none; opacity: 0.7"
+    ><%= p %></span
+  >
+  <% } else { %>
+  <a class="btn ghost small" href="<%= base + p %>"><%= p %></a>
+  <% } %> <% } %>
+</div>
