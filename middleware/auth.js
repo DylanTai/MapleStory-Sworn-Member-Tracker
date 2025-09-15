@@ -11,7 +11,7 @@ export async function canEditMember(req, res, next) {
     if (!m) return res.send("Error");
     req.member = m;
     if (!req.session.userId) return res.redirect("/login");
-    // All logged-in users may edit
+    // All logged-in users may edit, all are admins
     next();
   } catch (e) {
     return res.send("Error");

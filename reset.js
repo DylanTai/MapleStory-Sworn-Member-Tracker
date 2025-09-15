@@ -7,8 +7,7 @@ import User from "./models/User.js";
 import Member from "./models/Member.js";
 
 dotenv.config();
-const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/sworn_member_tracker";
+const MONGODB_URI = process.env.MONGODB_URI;
 
 async function promptYES(prompt) {
   const rl = createInterface({ input, output });

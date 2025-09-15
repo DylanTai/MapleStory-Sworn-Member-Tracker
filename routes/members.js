@@ -5,14 +5,13 @@ import { tryFetchAvatar, refreshAvatarsFor } from "../utils/avatar.js";
 
 const router = Router();
 
-// --- Index: list members with search/sort/pagination
+// Index: list members with search/sort/pagination
 router.get("/", isLoggedIn, async (req, res) => {
   try {
     const q = (req.query.q || "").trim();
     const filter = q
       ? { $or: [{ ign: new RegExp(q, "i") }, { discord: new RegExp(q, "i") }] }
       : {};
-
     const sortKey = (req.query.sort || "ign").toLowerCase();
     const order = (
       req.query.order ||
@@ -27,14 +26,11 @@ router.get("/", isLoggedIn, async (req, res) => {
         ? "isActive"
         : "ign";
     const sortObj = { [sortField]: order === "desc" ? -1 : 1 };
-
     const perPage = 6;
     const page = Math.max(parseInt(req.query.page || "1", 10), 1);
     const skip = (page - 1) * perPage;
-
     const total = await Member.countDocuments(filter);
     const totalPages = Math.max(Math.ceil(total / perPage), 1);
-
     const raw = await Member.find(filter)
       .sort(sortObj)
       .skip(skip)
@@ -67,7 +63,7 @@ router.get("/", isLoggedIn, async (req, res) => {
   }
 });
 
-// --- My Edits: must be before parameterized routes
+// My Edits: must be before parameterized routes
 router.get("/my-edits", isLoggedIn, async (req, res) => {
   try {
     const q = (req.query.q || "").trim();
@@ -78,7 +74,6 @@ router.get("/my-edits", isLoggedIn, async (req, res) => {
         { discord: new RegExp(q, "i") },
       ];
     }
-
     const sortKey = (req.query.sort || "ign").toLowerCase();
     const order = (
       req.query.order ||
@@ -93,14 +88,11 @@ router.get("/my-edits", isLoggedIn, async (req, res) => {
         ? "isActive"
         : "ign";
     const sortObj = { [sortField]: order === "desc" ? -1 : 1 };
-
     const perPage = 6;
     const page = Math.max(parseInt(req.query.page || "1", 10), 1);
     const skip = (page - 1) * perPage;
-
     const total = await Member.countDocuments(filter);
     const totalPages = Math.max(Math.ceil(total / perPage), 1);
-
     const raw = await Member.find(filter)
       .sort(sortObj)
       .skip(skip)
@@ -108,7 +100,6 @@ router.get("/my-edits", isLoggedIn, async (req, res) => {
       .select("ign avatarUrl avatarCheckedAt")
       .lean();
     await refreshAvatarsFor(raw, { force: req.query.refresh === "1" });
-
     let members = await Member.find(filter)
       .sort(sortObj)
       .skip(skip)
@@ -117,7 +108,6 @@ router.get("/my-edits", isLoggedIn, async (req, res) => {
       .lean();
 
     members = members.map((m) => ({ ...m, canEdit: !!req.session.userId }));
-
     return res.render("members/index", {
       members,
       q,
@@ -133,12 +123,12 @@ router.get("/my-edits", isLoggedIn, async (req, res) => {
   }
 });
 
-// --- New
+// New
 router.get("/new", isLoggedIn, (req, res) => {
   return res.render("members/new", { title: "Add Member" });
 });
 
-// --- Create
+// Create
 router.post("/", isLoggedIn, async (req, res) => {
   try {
     const data = {
@@ -163,7 +153,7 @@ router.post("/", isLoggedIn, async (req, res) => {
   }
 });
 
-// --- Show (public)
+// Show (public)
 router.get("/:id", async (req, res) => {
   try {
     const doc = await Member.findById(req.params.id)
@@ -180,7 +170,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// --- Edit
+// Edit
 router.get("/:id/edit", isLoggedIn, canEditMember, async (req, res) => {
   try {
     const m = await Member.findById(req.params.id).lean();
@@ -192,7 +182,7 @@ router.get("/:id/edit", isLoggedIn, canEditMember, async (req, res) => {
   }
 });
 
-// --- Update
+// Update
 router.put("/:id", isLoggedIn, canEditMember, async (req, res) => {
   try {
     const updates = {
@@ -210,7 +200,7 @@ router.put("/:id", isLoggedIn, canEditMember, async (req, res) => {
   }
 });
 
-// --- Refresh one avatar
+// Refresh one avatar
 router.post(
   "/:id/refresh-avatar",
   isLoggedIn,
@@ -231,7 +221,7 @@ router.post(
   }
 );
 
-// --- Delete
+// Delete
 router.delete("/:id", isLoggedIn, canEditMember, async (req, res) => {
   try {
     await Member.findByIdAndDelete(req.params.id);
@@ -242,10 +232,10 @@ router.delete("/:id", isLoggedIn, canEditMember, async (req, res) => {
   }
 });
 
-// --- Danger zone: wipe all members (requires captcha exact match)
+// Danger zone: wipe all members (requires captcha exact match)
 router.post("/wipe-members", isLoggedIn, async (req, res) => {
   try {
-    const captcha = (req.body.captcha || "").trim();
+    const captcha = req.body.captcha || "";
     if (captcha !== "I AM MOST CERTAIN I WANT THIS ACTION TO BE DONE!!") {
       return res.send("Error");
     }

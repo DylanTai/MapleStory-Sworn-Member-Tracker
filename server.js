@@ -34,11 +34,10 @@ app.use(methodOverride("_method"));
 // Sessions
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "dev-secret",
+    secret: "dev-secret",
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
   })
 );
 
@@ -46,7 +45,6 @@ app.use(
 app.use((req, res, next) => {
   res.locals.title = "Sworn Member Tracker";
   res.locals.commas = (v) => {
-    if (v === null || v === undefined || v === "") return "";
     const n =
       typeof v === "number" ? v : Number(String(v).replace(/[^0-9.-]/g, ""));
     if (Number.isNaN(n)) return v;

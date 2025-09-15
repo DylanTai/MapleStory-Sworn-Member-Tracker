@@ -55,7 +55,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// Delete ONLY current user (captcha required) and logout
+// Danger zone: delete ONLY current user (captcha required) and logout
 router.post("/account/delete-self", isLoggedIn, async (req, res) => {
   try {
     const EXACT = "I AM MOST CERTAIN I WANT THIS ACTION TO BE DONE!!";
