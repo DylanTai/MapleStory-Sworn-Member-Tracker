@@ -1,3 +1,4 @@
+// Routes to packages
 import express from "express";
 import expressLayouts from "express-ejs-layouts";
 import mongoose from "mongoose";
@@ -8,6 +9,7 @@ import MongoStore from "connect-mongo";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+// Routes to files
 import User from "./models/User.js";
 import Member from "./models/Member.js";
 import authRoutes from "./routes/auth.js";
