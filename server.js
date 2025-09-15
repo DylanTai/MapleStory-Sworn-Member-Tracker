@@ -85,20 +85,16 @@ app.get("/roster", async (req, res) => {
   try {
     const status = (req.query.status || "active").toLowerCase();
     const isInactive = status === "inactive";
-
     const perPage = 15;
     const page = Math.max(parseInt(req.query.page || "1", 10), 1);
     const skip = (page - 1) * perPage;
-
     const filter = isInactive
       ? { isActive: false }
       : {
           $or: [{ isActive: { $exists: false } }, { isActive: { $ne: false } }],
         };
-
     const total = await Member.countDocuments(filter);
     const totalPages = Math.max(Math.ceil(total / perPage), 1);
-
     const slice = await Member.find(filter, {
       ign: 1,
       avatarUrl: 1,
