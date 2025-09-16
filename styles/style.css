@@ -1,0 +1,209 @@
+/* ChatGPT wrote this */
+:root {
+  --bg: #000;
+  --card: #120910;
+  --ink: #ffe6f2;
+  --muted: #f5a1c8;
+  --accent: #ff77b7;
+  --danger: #ff4d94;
+  --nav: #ff7aa2;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: #000;
+  color: var(--ink);
+}
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.topbar {
+  background: var(--nav);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #222;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.brand {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+nav a {
+  margin-right: 12px;
+}
+.auth .btn,
+.auth .linklike {
+  margin-left: 8px;
+}
+main {
+  max-width: 980px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 12px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  border-bottom: 1px solid #222;
+  padding: 8px;
+  text-align: left;
+}
+.form label {
+  display: block;
+  margin: 8px 0;
+}
+input,
+textarea,
+select {
+  background: #0d0d0d;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 8px;
+  border-radius: 10px;
+  width: 100%;
+}
+textarea {
+  min-height: 100px;
+}
+.btn {
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #fff;
+  display: inline-block;
+}
+.btn:hover {
+  text-decoration: none;
+  filter: brightness(1.1);
+}
+.btn.ghost {
+  background: transparent;
+}
+.btn.small {
+  padding: 4px 8px;
+}
+.btn.danger {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+.error {
+  color: #ff5c5c;
+}
+.muted {
+  color: var(--muted);
+}
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid #333;
+  background: #111;
+}
+.tag {
+  display: inline-block;
+  border: 1px solid #333;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: #ccc;
+  margin-top: 6px;
+}
+
+.card:hover {
+  border-color: #1e2a35;
+}
+
+.topbar a,
+.topbar .muted {
+  color: #fff;
+}
+
+/* Roster-specific tweaks */
+.roster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+.roster-card {
+  background: var(--card);
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.roster-card .avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 10px;
+}
+.roster-card .ign {
+  margin-top: 6px;
+}
+
+/* Navbar readability */
+.topbar {
+  background: var(--nav);
+  color: #fff;
+}
+.topbar .nav-center a {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-right: 8px;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  color: #fff;
+}
+.topbar .nav-center a:hover {
+  background: rgba(0, 0, 0, 0.28);
+  text-decoration: none;
+}
+.topbar .brand {
+  color: #fff;
+}
+
+.avatar-sm {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid #333;
+  background: #111;
+}

@@ -29,7 +29,7 @@ app.use(expressLayouts);
 app.set("layout", "layout");
 
 // Static + parsers + method override
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "styles")));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
