@@ -21,11 +21,11 @@ This project was built to help with guild management that was either previously 
 
 ### Deployed App
 
-[Live Deployment Link, works as of 9/16/25](#) _(https://maplestory-sworn-member-tracker-production.up.railway.app/roster)_
+[Live Deployment Link, works as of 9/16/25](https://maplestory-sworn-member-tracker-production.up.railway.app/roster)
 
 ### Planning Materials
 
-[Project Proposal](#) _(https://trello.com/b/7hbCnHqI/men-stack-crud-app-project-maplestory-guild-input)_
+[Project Proposal](https://trello.com/b/7hbCnHqI/men-stack-crud-app-project-maplestory-guild-input)
 
 ---
 
