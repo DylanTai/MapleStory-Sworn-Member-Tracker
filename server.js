@@ -55,7 +55,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// DB
+// Database
 if (!process.env.MONGODB_URI) {
   console.log("Missing MONGODB_URI");
   process.exit(1);
