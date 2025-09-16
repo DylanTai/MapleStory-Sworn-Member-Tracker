@@ -31,14 +31,16 @@ This project was built to help with guild management that was either previously 
 
 ## Attributions
 
-This application was built using resources and libraries from the open-source community:
+This application was built using resources and libraries from these open-sources and applications:
 
 - [Express.js](https://expressjs.com/) – Web framework
 - [Mongoose](https://mongoosejs.com/) – MongoDB ODM
 - [EJS](https://ejs.co/) – Templating engine
 - [Railway](https://railway.com/) – Deploying the web application
+- [Bootstrap](https://boot)
 - [MapleRanks](https://mapleranks.com/) - Having updated information for the avatars
 - [ChatGPT](https://chatgpt.com/) - Helping with CSS and code to scrape MapleRanks
+- [Bootsrap](https://getbootstrap.com/) - Styling
 
 ---
 
