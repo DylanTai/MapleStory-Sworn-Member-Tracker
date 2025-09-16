@@ -22,6 +22,9 @@ This project was built to help with guild management that was either previously 
 ### Deployed App
 
 [Live Deployment Link, works as of 9/16/25](https://maplestory-sworn-member-tracker-production.up.railway.app/roster)
+The default username and password is:
+admin
+password
 
 ### Planning Materials
 
