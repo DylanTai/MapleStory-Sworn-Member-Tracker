@@ -38,7 +38,7 @@ This application was built using resources and libraries from these open-sources
 - [EJS](https://ejs.co/) – Templating engine
 - [Railway](https://railway.com/) – Deploying the web application
 - [MapleRanks](https://mapleranks.com/) - Having updated information for the avatars
-- [ChatGPT](https://chatgpt.com/) - Helping with CSS and code to scrape MapleRanks
+- [ChatGPT](https://chatgpt.com/) - Helping with CSS, code to scrape MapleRanks, and organization of files
 - [Bootsrap](https://getbootstrap.com/) - Custom styling
 
 ---
