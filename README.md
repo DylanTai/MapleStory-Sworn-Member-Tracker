@@ -37,8 +37,8 @@ This application was built using resources and libraries from the open-source co
 - [Mongoose](https://mongoosejs.com/) – MongoDB ODM
 - [EJS](https://ejs.co/) – Templating engine
 - [Railway](https://railway.com/) – Styling
-- [ChatGPT](https://chatgpt.com/) - Helping with CSS and scraping API
 - [MapleRanks](https://mapleranks.com/) - Having updated information for the avatars
+- [ChatGPT](https://chatgpt.com/) - Helping with CSS and code to scrape MapleRanks
 
 ---
 
