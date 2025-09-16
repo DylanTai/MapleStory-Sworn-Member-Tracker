@@ -4,7 +4,7 @@
 
 ## Description
 
-This **Sworn Member Tracker** is a web application built to help manage members in a MapleStory guild, specifically for the guild Sworn. It provides tools for searching, editing, and tracking guild members by IGN and Discord.
+This **Sworn Member Tracker** is a web application built to help manage members in a MapleStory (an MMORPG made by the company Nexon) guild, specifically for the guild Sworn. It provides tools for searching, editing, and tracking guild members by IGN and Discord.
 
 This project was built to help with guild management that was either previously done manually or not at all, making it easier to organize members, record edits, and maintain accurate rosters.
 
